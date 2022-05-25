@@ -232,14 +232,3 @@ class ExtractTabel:
     return d  
 
 
-# lista_pdfs = glob.glob("*.pdf")
-
-# for idx, file in enumerate(lista_pdfs):
-#  try:
-#    e = ExtractTabel(file)
-#    dicio = e.extract_tables()
-#    print(f'{idx}: Deu certo, a quantidade de dfs é: ')
-#    print(len(dicio))
-#    print('-------')
-#  except:
-#     print(idx, file)
