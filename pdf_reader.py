@@ -1,5 +1,4 @@
 from py_pdf_parser.loaders import load_file
-from py_pdf_parser.visualise import visualise
 import tabula, re, json, glob, numpy
 from pandas import concat
 
@@ -23,7 +22,6 @@ class ExtractTabel:
     self.get_summary_pages = self._get_summary_pages()
     self.table_pages       = self._get_summary_tables_pages()
     self.paginas_tabela    = self._get_num_summary_tables_pages()
-
 
   def _get_summary_pages(self):
     """ Extrai as páginas em que as tabelas, os relatórios e as notas explicativas
@@ -231,6 +229,12 @@ class ExtractTabel:
       d[self.get_table_name(v[0]).text()] = tabela
     return d  
 
+  def get_notas_explicativas_page(self):
+    patttern = r'Notas Explicativas .+'
+    sumario = self._get_summary_pages()
+    for i in sumario.keys():
+      if re.search(patttern, i) != None:
+        return sumario[i]
 
 # lista_pdfs = glob.glob("*.pdf")
 
