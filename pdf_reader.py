@@ -116,7 +116,6 @@ class ExtractTabel:
         List: Uma lista com o número das páginas referentes à tabelas (DFs e DMP) do pdf
     """
     d = self._get_summary_tables_pages()
-    # keys = [k for k,v in d.items() if re.match(r'Relat.+|Nota.+', k) == None]
     keys = [k for k,v in d.items()]
     d_filter = [{v: d[v]} for i,v in enumerate(keys)]
     if len(self.document.get_page(2).elements.filter_by_regex(r'.ndice')) == 0:
@@ -217,29 +216,6 @@ class ExtractTabel:
     except:
       pass
   
-  # def extract_tables(self):
-  #   """ Realiza a extração completa das tabelas devolvendo uma lista de DataFrames
-
-  #   Returns:
-  #       Dict: Contém um dicionário com o nome da tabela com chave e o DataFrame correspondente
-  #   """
-  #   d = {}
-  #   for page in self._get_num_summary_tables_pages():
-  #     if self.get_table_name(page).text() == self.get_table_name(page+1).text():
-  #       pagina_1   = self.get_table(page)
-  #       pagina_2   = self.get_table(page+1)
-  #       tabela     = concat([pagina_1, pagina_2], ignore_index=True)
-  #       d[self.get_table_name(page).text()] = tabela
-  #     else:
-  #       d[self.get_table_name(page).text()] = self.get_table(page)
-  #   return d
-
-  def len_table(self):
-    d = self._get_summary_pages()
-    keys = [k for k,v in d.items() if re.match(r'Nota.+', k) == None]
-    d_filter = [{v: d[v]} for i,v in enumerate(keys)]
-    return d_filter
-
   
   def extract_tables(self):
     """ Realiza a extração completa das tabelas devolvendo uma lista de DataFrames
@@ -256,48 +232,14 @@ class ExtractTabel:
     return d  
 
 
-    # lista = list(dicio.values())
-    # d = {}
-    # for idx,page in enumerate(dicio):
-    #   if dicio[idx] != dicio[-1]:
-    #     next_num = dicio[idx+1]
-    #     lista = [i for i in range(0, (next_num - page)+1)]
-    #     print(lista)
-    #     # tabela = concat(lista, ignore_index=True)
-    #     # d[self.get_table_name(page).text()] = tabela
-    
+# lista_pdfs = glob.glob("*.pdf")
 
-
-
-    #   for idx,value in enumerate(lista):
-    #     if value != lista[-1]:
-    #       next_num = lista[idx + 1]
-    #       lista = [self.get_table(page+i) for i in range(0, (next_num - page)+1)]
-    #       tabela = concat(lista, ignore_index=True)
-    #       d[self.get_table_name(page).text()] = tabela
-
-            
-    # return d
-
-
-# e = ExtractTabel('71281_000906_05052022151801.pdf')
-
-
-
-
-# print(e._get_dfs_columns_names(6))
-# visualise(e.document)
-
-
-
-lista_pdfs = glob.glob("*.pdf")
-
-for idx, file in enumerate(lista_pdfs):
- try:
-   e = ExtractTabel(file)
-   dicio = e.extract_tables()
-   print(f'{idx}: Deu certo, o tamho é: ')
-   print(len(dicio))
-   print('-------')
- except:
-    print(idx, file)
+# for idx, file in enumerate(lista_pdfs):
+#  try:
+#    e = ExtractTabel(file)
+#    dicio = e.extract_tables()
+#    print(f'{idx}: Deu certo, a quantidade de dfs é: ')
+#    print(len(dicio))
+#    print('-------')
+#  except:
+#     print(idx, file)
