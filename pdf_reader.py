@@ -229,12 +229,6 @@ class ExtractTabel:
       d[self.get_table_name(v[0]).text()] = tabela
     return d  
 
-  def get_notas_explicativas_page(self):
-    patttern = r'Notas Explicativas .+'
-    sumario = self._get_summary_pages()
-    for i in sumario.keys():
-      if re.search(patttern, i) != None:
-        return sumario[i]
 
 # lista_pdfs = glob.glob("*.pdf")
 
